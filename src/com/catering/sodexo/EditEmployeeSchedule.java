@@ -1,0 +1,377 @@
+package com.catering.sodexo;
+
+import java.awt.EventQueue;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import com.catering.classes.AvailabilityDAO;
+import com.catering.classes.Employee;
+import com.catering.classes.EmployeeDAO;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class EditEmployeeSchedule {
+
+	private static int empID;
+	private StringBuilder[] empAvailTime;
+	private Employee e;
+	public static int getEmpID() {
+		return empID;
+	}
+
+	public static void setEmpID(int empIDin) {
+		empID = empIDin;
+	}
+
+	private JFrame frame;
+	private JTextField textFieldFirstName;
+	private JTextField textFieldLastName;
+	private JTextField textFieldEmail;
+	private JTextField textFieldPhone;
+	private JTextField textFieldAddress;
+	private JTextField textFieldState;
+	private JTextField textFieldZip;
+	private JLabel lblAvaliability;
+	private JLabel lblMonday;
+	private JLabel lblTuesday;
+	private JLabel lblWednesday;
+	private JLabel lblThursday;
+	private JLabel lblFriday;
+	private JLabel lblSaturday;
+	private JLabel lblSunday;
+	private JTextField textFieldMonday;
+	private JTextField textFieldTuesday;
+	private JTextField textFieldWednesday;
+	private JTextField textFieldThursday;
+	private JTextField textFieldFriday;
+	private JTextField textFieldSaturday;
+	private JTextField textFieldSunday;
+	private JButton SaveButton;
+	private JButton CancelButton;
+	private JSeparator separator;
+	private JCheckBox chckbxDriver;
+	private JRadioButton rdbtnStudent;
+	private JRadioButton rdbtnLead;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					System.out.println(getEmpID() + " emp id "+this.getClass().getSimpleName());
+					EditEmployeeSchedule window = new EditEmployeeSchedule();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public EditEmployeeSchedule() {
+		initialize();
+		System.out.println("after init");
+		loadEmployeeDetails();
+		loadEmployeeTimings();
+		
+		
+		
+	}
+
+	private void loadEmployeeDetails() {
+		
+		e = EmployeeDAO.fetchEmployee(getEmpID());
+		
+		textFieldFirstName.setText(e.getFName());
+		textFieldLastName.setText(e.getLName());
+		textFieldPhone.setText(Integer.toString(e.getPhone()));
+		textFieldEmail.setText(e.getEmailID());
+		textFieldAddress.setText(e.getAddress());
+		textFieldState.setText(e.getState());
+		textFieldZip.setText(Integer.toString(e.getZIP()));
+		chckbxDriver.setSelected(e.isDriver());
+		if(e.isStudent()){
+			rdbtnStudent.setSelected(true);
+		}else{
+			rdbtnLead.setSelected(true);
+		}
+	}
+
+	private void loadEmployeeTimings() {
+		
+		empAvailTime = AvailabilityDAO.getAllTimings(getEmpID());
+		
+		textFieldMonday.setText(empAvailTime[0].toString());
+		textFieldTuesday.setText(empAvailTime[1].toString());
+		textFieldWednesday.setText(empAvailTime[2].toString());
+		textFieldThursday.setText(empAvailTime[3].toString());
+		textFieldFriday.setText(empAvailTime[4].toString());
+		textFieldSaturday.setText(empAvailTime[5].toString());
+		textFieldSunday.setText(empAvailTime[6].toString());
+		
+		
+		
+	}
+
+
+	
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		
+		
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 1280, 720);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
+		JLabel lblFirstName = new JLabel("First Name");
+		lblFirstName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFirstName.setBounds(70, 115, 88, 34);
+		frame.getContentPane().add(lblFirstName);
+
+		JLabel lblLastName = new JLabel("Last Name");
+		lblLastName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLastName.setBounds(513, 115, 88, 34);
+		frame.getContentPane().add(lblLastName);
+
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmail.setBounds(70, 160, 88, 34);
+		frame.getContentPane().add(lblEmail);
+
+		JLabel lblPhone = new JLabel("Phone");
+		lblPhone.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPhone.setBounds(513, 160, 88, 34);
+		frame.getContentPane().add(lblPhone);
+
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddress.setBounds(70, 213, 88, 34);
+		frame.getContentPane().add(lblAddress);
+
+		JLabel lblState = new JLabel("State");
+		lblState.setHorizontalAlignment(SwingConstants.CENTER);
+		lblState.setBounds(70, 263, 88, 34);
+		frame.getContentPane().add(lblState);
+
+		JLabel lblZip = new JLabel("Zip");
+		lblZip.setHorizontalAlignment(SwingConstants.CENTER);
+		lblZip.setBounds(513, 263, 88, 34);
+		frame.getContentPane().add(lblZip);
+
+		textFieldFirstName = new JTextField();
+		textFieldFirstName.setBounds(186, 115, 305, 34);
+		frame.getContentPane().add(textFieldFirstName);
+		textFieldFirstName.setColumns(10);
+
+		textFieldLastName = new JTextField();
+		textFieldLastName.setColumns(10);
+		textFieldLastName.setBounds(634, 115, 305, 34);
+		frame.getContentPane().add(textFieldLastName);
+
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(186, 167, 305, 34);
+		frame.getContentPane().add(textFieldEmail);
+
+		textFieldPhone = new JTextField();
+		textFieldPhone.setColumns(10);
+		textFieldPhone.setBounds(634, 167, 305, 34);
+		frame.getContentPane().add(textFieldPhone);
+
+		textFieldAddress = new JTextField();
+		textFieldAddress.setColumns(10);
+		textFieldAddress.setBounds(186, 220, 753, 34);
+		frame.getContentPane().add(textFieldAddress);
+
+		textFieldState = new JTextField();
+		textFieldState.setColumns(10);
+		textFieldState.setBounds(186, 270, 305, 34);
+		frame.getContentPane().add(textFieldState);
+
+		textFieldZip = new JTextField();
+		textFieldZip.setColumns(10);
+		textFieldZip.setBounds(634, 270, 305, 34);
+		frame.getContentPane().add(textFieldZip);
+
+		lblAvaliability = new JLabel("AVAILABILITY");
+		lblAvaliability.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAvaliability.setBounds(70, 329, 88, 34);
+		frame.getContentPane().add(lblAvaliability);
+
+		lblMonday = new JLabel("Monday");
+		lblMonday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonday.setBounds(70, 374, 88, 34);
+		frame.getContentPane().add(lblMonday);
+
+		lblTuesday = new JLabel("Tuesday");
+		lblTuesday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTuesday.setBounds(70, 412, 88, 34);
+		frame.getContentPane().add(lblTuesday);
+
+		lblWednesday = new JLabel("Wednesday");
+		lblWednesday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWednesday.setBounds(70, 451, 88, 34);
+		frame.getContentPane().add(lblWednesday);
+
+		lblThursday = new JLabel("Thursday");
+		lblThursday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblThursday.setBounds(70, 492, 88, 34);
+		frame.getContentPane().add(lblThursday);
+
+		lblFriday = new JLabel("Friday");
+		lblFriday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFriday.setBounds(70, 535, 88, 34);
+		frame.getContentPane().add(lblFriday);
+
+		lblSaturday = new JLabel("Saturday");
+		lblSaturday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSaturday.setBounds(70, 580, 88, 34);
+		frame.getContentPane().add(lblSaturday);
+
+		lblSunday = new JLabel("Sunday");
+		lblSunday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSunday.setBounds(70, 625, 88, 34);
+		frame.getContentPane().add(lblSunday);
+
+		textFieldMonday = new JTextField();
+		textFieldMonday.setBounds(186, 374, 753, 34);
+		frame.getContentPane().add(textFieldMonday);
+		textFieldMonday.setColumns(10);
+
+		textFieldTuesday = new JTextField();
+		textFieldTuesday.setColumns(10);
+		textFieldTuesday.setBounds(186, 412, 753, 34);
+		frame.getContentPane().add(textFieldTuesday);
+
+		textFieldWednesday = new JTextField();
+		textFieldWednesday.setColumns(10);
+		textFieldWednesday.setBounds(186, 451, 753, 34);
+		frame.getContentPane().add(textFieldWednesday);
+
+		textFieldThursday = new JTextField();
+		textFieldThursday.setColumns(10);
+		textFieldThursday.setBounds(186, 492, 753, 34);
+		frame.getContentPane().add(textFieldThursday);
+
+		textFieldFriday = new JTextField();
+		textFieldFriday.setColumns(10);
+		textFieldFriday.setBounds(186, 537, 753, 34);
+		frame.getContentPane().add(textFieldFriday);
+
+		textFieldSaturday = new JTextField();
+		textFieldSaturday.setColumns(10);
+		textFieldSaturday.setBounds(186, 581, 753, 34);
+		frame.getContentPane().add(textFieldSaturday);
+
+		textFieldSunday = new JTextField();
+		textFieldSunday.setColumns(10);
+		textFieldSunday.setBounds(186, 625, 753, 34);
+		frame.getContentPane().add(textFieldSunday);
+
+		SaveButton = new JButton("SAVE");
+		SaveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Employee emp = new Employee();
+				emp.setID(getEmpID());
+				emp.setFName(textFieldFirstName.getText());
+				emp.setLName(textFieldLastName.getText());
+				emp.setPhone(Integer.parseInt(textFieldPhone.getText()));
+				emp.setAddress(textFieldAddress.getText());
+				emp.setEmailID(textFieldEmail.getText());
+				emp.setState(textFieldState.getText());
+				emp.setZIP(Integer.parseInt(textFieldZip.getText()));
+				emp.setDriver(chckbxDriver.isSelected());
+				emp.setStudent(rdbtnStudent.isSelected());
+				
+				EmployeeDAO.updateEmployee(emp);
+				
+				AvailabilityDAO.deleteTimings(getEmpID());
+				
+				AvailabilityDAO.addTimings(getEmpID(), textFieldMonday.getText(), "Monday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldTuesday.getText(), "tuesday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldWednesday.getText(), "wednesday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldThursday.getText(), "thursday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldFriday.getText(), "friday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldSaturday.getText(), "saturday");
+				AvailabilityDAO.addTimings(getEmpID(), textFieldSunday.getText(), "Sunday");
+				
+				JOptionPane.showMessageDialog(null, textFieldFirstName.getText().toUpperCase() + " added !");
+				MainPage.main(null);
+				frame.dispose();
+			}
+
+		});
+		SaveButton.setBounds(1124, 612, 116, 47);
+		frame.getContentPane().add(SaveButton);
+
+		CancelButton = new JButton("CANCEL");
+		CancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainPage.main(null);
+				frame.dispose();
+
+			}
+		});
+		CancelButton.setBounds(987, 612, 116, 47);
+		frame.getContentPane().add(CancelButton);
+
+		separator = new JSeparator();
+		separator.setBounds(10, 329, 1230, 2);
+		frame.getContentPane().add(separator);
+
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainPage.main(new String[] {});
+				frame.dispose();
+			}
+		});
+		btnBack.setBounds(1124, 11, 116, 47);
+		frame.getContentPane().add(btnBack);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(987, 167, 252, 135);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+
+		chckbxDriver = new JCheckBox("Driver");
+		chckbxDriver.setBounds(6, 7, 119, 31);
+		panel.add(chckbxDriver);
+
+		ButtonGroup group = new ButtonGroup();
+
+		rdbtnStudent = new JRadioButton("Student");
+		rdbtnStudent.setBounds(6, 105, 109, 23);
+		panel.add(rdbtnStudent);
+
+		rdbtnLead = new JRadioButton("Lead");
+		rdbtnLead.setBounds(137, 105, 109, 23);
+		panel.add(rdbtnLead);
+
+		group.add(rdbtnLead);
+		group.add(rdbtnStudent);
+	}
+
+}
