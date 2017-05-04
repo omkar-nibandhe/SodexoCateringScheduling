@@ -6,6 +6,8 @@ package com.catering.classes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.catering.sodexo.SQLiteConnection;
 
@@ -117,8 +119,8 @@ public class AvailabilityDAO {
 				pstmt.setString(2, day.toLowerCase());
 				pstmt.setInt(3, Integer.parseInt(timeEntry[0]));
 				pstmt.setInt(4, Integer.parseInt(timeEntry[1]));
-				System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
-						+ " EndTime: " + timeEntry[1]);
+				/*//System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
+						+ " EndTime: " + timeEntry[1]);*/
 				pstmt.executeUpdate();
 			}
 		} else {
@@ -127,9 +129,9 @@ public class AvailabilityDAO {
 			pstmt.setString(2, day.toLowerCase());
 			pstmt.setString(3, timeEntry[0]);
 			pstmt.setString(4, timeEntry[1]);
-			System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
+			/*//System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
 					+ " EndTime: " + timeEntry[1]);
-			return pstmt.executeUpdate();
+			*/return pstmt.executeUpdate();
 		}
 
 		return 0;
@@ -154,6 +156,29 @@ public class AvailabilityDAO {
 				res.append(time);
 			}
 			result = res.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	public static List<String> getAllTimingsForDay(String day){
+		List<String> result = null;
+		try {
+			Connection editEmployee = SQLiteConnection.getInstance();
+			String SQLquery = "SELECT EmployeeTable.FName, EmployeeTable.LName, AvailabilityTable.Day, AvailabilityTable.EmployeeID, AvailabilityTable.StartTime, AvailabilityTable.EndTIme FROM AvailabilityTable, EmployeeTable WHERE Day = ? AND AvailabilityTable.EmployeeID == EmployeeTable.EmployeeID";
+			PreparedStatement stmt = editEmployee.prepareStatement(SQLquery);
+			stmt.setString(1, day.toLowerCase());
+
+			ResultSet rs = stmt.executeQuery();
+			result = new ArrayList<String>();
+			String time = null;
+			while(rs.next()){
+				time = null;
+				time = rs.getInt("EmployeeID")+" "+rs.getString("FName")+ " "+ rs.getString("LName")+ " "+ rs.getInt("StartTime") + " " + rs.getInt("EndTime");
+				result.add(time);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -56,7 +56,7 @@ public class EventDAO {
 		try {
 
 			Connection updateEvent = SQLiteConnection.getInstance();
-			String sqlQuery = "UPDATE EventTable SET EventID = ?, EventName = ?, EventLocation = ?, GuestCoune = ?, Disposable = ?, StartTime = ?, EndTime = ?, Date = ? WHERE SrNo = ?";
+			String sqlQuery = "UPDATE EventTable SET EventID = ?, EventName = ?, EventLocation = ?, GuestCoune = ?, Disposable = ?, StartTime = ?, EndTime = ?, Date = ?, Day = ? WHERE SrNo = ?";
 			
 			PreparedStatement pstmt = updateEvent.prepareStatement(sqlQuery);
 			
@@ -68,8 +68,9 @@ public class EventDAO {
 			pstmt.setInt(6, e.getStartTime());
 			pstmt.setInt(7, e.getEndTime());
 			pstmt.setDate(8, e.getDate());
-			pstmt.setInt(9, e.getSrNo());
-	
+			pstmt.setString(9, e.getDay());
+			pstmt.setInt(10, e.getSrNo());
+			
 			pstmt.executeUpdate();
 			pstmt.close();
 
@@ -84,7 +85,7 @@ public class EventDAO {
 
 			Connection saveConnection = SQLiteConnection.getInstance();
 			String sqlQuerry = "INSERT INTO EventTable (EventID, EventName, EventLocation, GuestCoune, Disposable, StartTime, EndTime, Date, Day) VALUES (?,?,?,?,?,?,?,?,?)";
-			String sqlQuerry2 = "SELECT * FROM EventTable WHERE EventID = ? and EventName = ? and Date = ?;";
+			String sqlQuerry2 = "SELECT * FROM EventTable WHERE EventID = ? and EventName = ?";
 
 			PreparedStatement pstmt = saveConnection.prepareStatement(sqlQuerry);
 
@@ -105,9 +106,9 @@ public class EventDAO {
 			pstmt = saveConnection.prepareStatement(sqlQuerry2);
 			pstmt.setInt(1, e.getEventID());
 			pstmt.setString(2, e.getEventName());
-			pstmt.setDate(3, e.getDate());
 			ResultSet rs = pstmt.executeQuery();
-			return rs.getInt("SrNo");
+			SrNo = rs.getInt("SrNo");
+			return SrNo;
 
 		} catch (Exception exc) {
 			// TODO: handle exception

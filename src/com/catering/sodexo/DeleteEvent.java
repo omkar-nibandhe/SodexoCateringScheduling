@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.catering.classes.EventDAO;
+import com.catering.classes.ScheduleDAO;
 
 import net.proteanit.sql.DbUtils;
 
@@ -78,6 +79,7 @@ public class DeleteEvent {
 					 * ViewEvents_2.setMySrNo(val); ViewEvents_2.main(null);
 					 */
 					EventDAO.removeEvent((int)table.getModel().getValueAt(row, 0));
+					ScheduleDAO.removeSchedulebyEventID((int)table.getModel().getValueAt(row, 1));
 					EmployeeScheduler.main(null);
 					frame.dispose();
 				}
@@ -133,7 +135,7 @@ public class DeleteEvent {
 		} catch (Exception e) {
 
 		} finally {
-			SQLiteConnection.dbClose();
+			//SQLiteConnection.dbClose();
 		}
 	}
 

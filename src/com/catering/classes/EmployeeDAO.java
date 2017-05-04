@@ -84,7 +84,7 @@ public class EmployeeDAO {
 			pstmt.setBoolean(9, e.isStudent());
 
 			pstmt.executeUpdate();
-			saveConnection.commit();
+			//saveConnection.commit();
 			pstmt.close();
 
 			pstmt = saveConnection.prepareStatement(sqlQuerry2);
@@ -109,7 +109,21 @@ public class EmployeeDAO {
 			PreparedStatement pstmt = saveConnection.prepareStatement(sqlQuerry);
 			pstmt.setInt(1, empID);
 			pstmt.executeUpdate();
-			//saveConnection.commit();
+			pstmt.close();
+			
+			sqlQuerry = "DELETE FROM AvailabilityTable WHERE EmployeeID = ?";
+			pstmt = saveConnection.prepareStatement(sqlQuerry);
+			pstmt.setInt(1, empID);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			sqlQuerry = "DELETE FROM ScheduleDB WHERE EmployeeID = ?";
+			pstmt = saveConnection.prepareStatement(sqlQuerry);
+			pstmt.setInt(1, empID);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

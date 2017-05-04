@@ -59,7 +59,7 @@ public class DeleteEmployee {
 			ResultSet rs = stmt.executeQuery();
 			table.setModel(DbUtils.resultSetToTableModel(rs));
 			
-			SQLiteConnection.dbClose();
+			//SQLiteConnection.dbClose();
 
 		} catch (Exception e) {
 
@@ -150,11 +150,13 @@ public class DeleteEmployee {
 				try {
 					int row = table.getSelectedRow();
 					if (row > 0) {
-						switch(JOptionPane.showConfirmDialog(null, "Do you want to delete "+ table.getModel().getValueAt(row, 0))){
+						switch(JOptionPane.showConfirmDialog(null, "Do you want to delete "+ table.getModel().getValueAt(row, 1))){
 						case 0:
 							int deleteID = (int) table.getModel().getValueAt(row, 0);
 							AvailabilityDAO.deleteTimings(deleteID);
 							EmployeeDAO.removeEmployee(deleteID);
+							DeleteEmployee.main(null);
+							frame.dispose();
 							break;
 						case 1:
 							break;

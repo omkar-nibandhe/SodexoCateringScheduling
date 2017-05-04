@@ -59,12 +59,10 @@ public class ViewEmployees {
 
 			table.setModel(DbUtils.resultSetToTableModel(rs));
 
-			// SQLiteConnection.dbClose();
-
 		} catch (Exception e) {
 
 		} finally {
-			SQLiteConnection.dbClose();
+			//SQLiteConnection.dbClose();
 		}
 	}
 
@@ -80,7 +78,7 @@ public class ViewEmployees {
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EmployeeScheduler.main(null);
+				MainPage.main(null);
 				frame.dispose();
 			}
 		});

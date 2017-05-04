@@ -137,7 +137,7 @@ public class ViewEvents_1 {
 		} catch (Exception e) {
 
 		} finally {
-			SQLiteConnection.dbClose();
+			//SQLiteConnection.dbClose();
 		}
 	}
 

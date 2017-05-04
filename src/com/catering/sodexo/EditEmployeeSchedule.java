@@ -1,6 +1,10 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -18,14 +22,12 @@ import com.catering.classes.AvailabilityDAO;
 import com.catering.classes.Employee;
 import com.catering.classes.EmployeeDAO;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class EditEmployeeSchedule {
 
 	private static int empID;
 	private StringBuilder[] empAvailTime;
 	private Employee e;
+
 	public static int getEmpID() {
 		return empID;
 	}
@@ -71,7 +73,7 @@ public class EditEmployeeSchedule {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					System.out.println(getEmpID() + " emp id "+this.getClass().getSimpleName());
+					
 					EditEmployeeSchedule window = new EditEmployeeSchedule();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -86,37 +88,38 @@ public class EditEmployeeSchedule {
 	 */
 	public EditEmployeeSchedule() {
 		initialize();
-		System.out.println("after init");
+		// System.out.println("after init");
 		loadEmployeeDetails();
 		loadEmployeeTimings();
-		
-		
-		
+
 	}
 
 	private void loadEmployeeDetails() {
-		
+
 		e = EmployeeDAO.fetchEmployee(getEmpID());
-		
+		if (e == null)
+			return;
 		textFieldFirstName.setText(e.getFName());
 		textFieldLastName.setText(e.getLName());
+		
 		textFieldPhone.setText(Integer.toString(e.getPhone()));
 		textFieldEmail.setText(e.getEmailID());
 		textFieldAddress.setText(e.getAddress());
 		textFieldState.setText(e.getState());
 		textFieldZip.setText(Integer.toString(e.getZIP()));
 		chckbxDriver.setSelected(e.isDriver());
-		if(e.isStudent()){
+		if (e.isStudent()) {
 			rdbtnStudent.setSelected(true);
-		}else{
+		} else {
 			rdbtnLead.setSelected(true);
 		}
 	}
 
 	private void loadEmployeeTimings() {
-		
+
 		empAvailTime = AvailabilityDAO.getAllTimings(getEmpID());
-		
+		if (empAvailTime == null)
+			return;
 		textFieldMonday.setText(empAvailTime[0].toString());
 		textFieldTuesday.setText(empAvailTime[1].toString());
 		textFieldWednesday.setText(empAvailTime[2].toString());
@@ -124,27 +127,21 @@ public class EditEmployeeSchedule {
 		textFieldFriday.setText(empAvailTime[4].toString());
 		textFieldSaturday.setText(empAvailTime[5].toString());
 		textFieldSunday.setText(empAvailTime[6].toString());
-		
-		
-		
+
 	}
-
-
-	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblFirstName = new JLabel("First Name");
+		
 		lblFirstName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFirstName.setBounds(70, 115, 88, 34);
 		frame.getContentPane().add(lblFirstName);
@@ -180,11 +177,27 @@ public class EditEmployeeSchedule {
 		frame.getContentPane().add(lblZip);
 
 		textFieldFirstName = new JTextField();
+		textFieldFirstName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isAlphabetic(c))
+					e.consume();
+			}
+		});
 		textFieldFirstName.setBounds(186, 115, 305, 34);
 		frame.getContentPane().add(textFieldFirstName);
 		textFieldFirstName.setColumns(10);
 
 		textFieldLastName = new JTextField();
+		textFieldLastName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isAlphabetic(c) ))
+					e.consume();
+			}
+		});
 		textFieldLastName.setColumns(10);
 		textFieldLastName.setBounds(634, 115, 305, 34);
 		frame.getContentPane().add(textFieldLastName);
@@ -195,6 +208,15 @@ public class EditEmployeeSchedule {
 		frame.getContentPane().add(textFieldEmail);
 
 		textFieldPhone = new JTextField();
+		textFieldPhone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c)))
+					e.consume();
+
+			}
+		});
 		textFieldPhone.setColumns(10);
 		textFieldPhone.setBounds(634, 167, 305, 34);
 		frame.getContentPane().add(textFieldPhone);
@@ -205,11 +227,28 @@ public class EditEmployeeSchedule {
 		frame.getContentPane().add(textFieldAddress);
 
 		textFieldState = new JTextField();
+		textFieldState.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isAlphabetic(c))
+					e.consume();
+			}
+
+		});
 		textFieldState.setColumns(10);
 		textFieldState.setBounds(186, 270, 305, 34);
 		frame.getContentPane().add(textFieldState);
 
 		textFieldZip = new JTextField();
+		textFieldZip.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c)))
+					e.consume();
+			}
+		});
 		textFieldZip.setColumns(10);
 		textFieldZip.setBounds(634, 270, 305, 34);
 		frame.getContentPane().add(textFieldZip);
@@ -255,36 +294,100 @@ public class EditEmployeeSchedule {
 		frame.getContentPane().add(lblSunday);
 
 		textFieldMonday = new JTextField();
+		textFieldMonday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldMonday.setBounds(186, 374, 753, 34);
 		frame.getContentPane().add(textFieldMonday);
 		textFieldMonday.setColumns(10);
 
 		textFieldTuesday = new JTextField();
+		textFieldTuesday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
+
 		textFieldTuesday.setColumns(10);
 		textFieldTuesday.setBounds(186, 412, 753, 34);
 		frame.getContentPane().add(textFieldTuesday);
 
 		textFieldWednesday = new JTextField();
+		textFieldWednesday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldWednesday.setColumns(10);
 		textFieldWednesday.setBounds(186, 451, 753, 34);
 		frame.getContentPane().add(textFieldWednesday);
 
 		textFieldThursday = new JTextField();
+		textFieldThursday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldThursday.setColumns(10);
 		textFieldThursday.setBounds(186, 492, 753, 34);
 		frame.getContentPane().add(textFieldThursday);
 
 		textFieldFriday = new JTextField();
+		textFieldFriday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldFriday.setColumns(10);
 		textFieldFriday.setBounds(186, 537, 753, 34);
 		frame.getContentPane().add(textFieldFriday);
 
 		textFieldSaturday = new JTextField();
+		textFieldSaturday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldSaturday.setColumns(10);
 		textFieldSaturday.setBounds(186, 581, 753, 34);
 		frame.getContentPane().add(textFieldSaturday);
 
 		textFieldSunday = new JTextField();
+		textFieldSunday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
+					e.consume();
+			}
+		});
 		textFieldSunday.setColumns(10);
 		textFieldSunday.setBounds(186, 625, 753, 34);
 		frame.getContentPane().add(textFieldSunday);
@@ -292,23 +395,31 @@ public class EditEmployeeSchedule {
 		SaveButton = new JButton("SAVE");
 		SaveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Employee emp = new Employee();
 				emp.setID(getEmpID());
 				emp.setFName(textFieldFirstName.getText());
 				emp.setLName(textFieldLastName.getText());
-				emp.setPhone(Integer.parseInt(textFieldPhone.getText()));
+				if(textFieldPhone.getText().isEmpty()){
+					emp.setPhone(0);
+				}else{
+					emp.setPhone(Integer.parseInt(textFieldPhone.getText().substring(0, 10)));
+				}
 				emp.setAddress(textFieldAddress.getText());
 				emp.setEmailID(textFieldEmail.getText());
 				emp.setState(textFieldState.getText());
-				emp.setZIP(Integer.parseInt(textFieldZip.getText()));
+				if(textFieldZip.getText().isEmpty()){
+					emp.setZIP(0);
+				}else{
+					emp.setZIP(Integer.parseInt(textFieldZip.getText()));
+				}
 				emp.setDriver(chckbxDriver.isSelected());
 				emp.setStudent(rdbtnStudent.isSelected());
-				
+
 				EmployeeDAO.updateEmployee(emp);
-				
+
 				AvailabilityDAO.deleteTimings(getEmpID());
-				
+
 				AvailabilityDAO.addTimings(getEmpID(), textFieldMonday.getText(), "Monday");
 				AvailabilityDAO.addTimings(getEmpID(), textFieldTuesday.getText(), "tuesday");
 				AvailabilityDAO.addTimings(getEmpID(), textFieldWednesday.getText(), "wednesday");
@@ -316,7 +427,7 @@ public class EditEmployeeSchedule {
 				AvailabilityDAO.addTimings(getEmpID(), textFieldFriday.getText(), "friday");
 				AvailabilityDAO.addTimings(getEmpID(), textFieldSaturday.getText(), "saturday");
 				AvailabilityDAO.addTimings(getEmpID(), textFieldSunday.getText(), "Sunday");
-				
+
 				JOptionPane.showMessageDialog(null, textFieldFirstName.getText().toUpperCase() + " added !");
 				MainPage.main(null);
 				frame.dispose();

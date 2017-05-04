@@ -41,6 +41,7 @@ public class EditEmplyee {
 	private JButton SaveButton;
 	private JButton CancelButton;
 	private JSeparator separator;
+	private JLabel lblInputTimingsLike;
 
 	/**
 	 * Launch the application.
@@ -251,5 +252,10 @@ public class EditEmplyee {
 		separator = new JSeparator();
 		separator.setBounds(10, 329, 1230, 2);
 		frame.getContentPane().add(separator);
+		
+		lblInputTimingsLike = new JLabel("<HTML>Input timings like:<br>0700-1100;<br>1200-1600;1800-2330;<br><br>Use '-' to seperate Start Time and End Time<br>Use ';' to complete a timing</HTML>");
+		lblInputTimingsLike.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInputTimingsLike.setBounds(987, 374, 249, 218);
+		frame.getContentPane().add(lblInputTimingsLike);
 	}
 }
