@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.catering.sodexo.SQLiteConnection;
-
 /**
  * @author Omkar Nibandhe<br>
  *         May 4, 2017 <br>
@@ -133,6 +131,7 @@ public class EmployeeDAO {
 	 * (int) value.
 	 * 
 	 * @param empID
+	 *            int value unique employee identification number
 	 */
 	public static void removeEmployee(int empID) {
 		try {

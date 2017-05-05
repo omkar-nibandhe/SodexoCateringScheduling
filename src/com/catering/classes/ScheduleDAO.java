@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.catering.sodexo.SQLiteConnection;
-
 /**
  * @author Omkar Nibandhe <br>
  *         May 5, 2017 <br>
@@ -162,6 +160,7 @@ public class ScheduleDAO {
 	 * Method to remocve schedules in the ScheduleDB database by employeeID.
 	 * 
 	 * @param employeeID
+	 *            unique int value for employee referencing.
 	 */
 	public static void removeSchedulebyEmployeeID(int employeeID) {
 		try {

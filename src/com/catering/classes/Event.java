@@ -245,7 +245,7 @@ public class Event {
 	/**
 	 * Set the service type of this event.
 	 * 
-	 * @param isDisposable
+	 * @param isDisposable true if type of service is disposable
 	 */
 	public void setIsDisposable(Boolean isDisposable) {
 		this.isDisposable = isDisposable;

@@ -23,6 +23,12 @@ import com.catering.classes.AvailabilityDAO;
 import com.catering.classes.Employee;
 import com.catering.classes.EmployeeDAO;
 
+/**
+ * @author Omkar Nibandhe <br>
+ *         May 5, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class AddEmplyee {
 
 	private JFrame frame;
@@ -59,6 +65,9 @@ public class AddEmplyee {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param args
+	 *            Usually null. Unused.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -132,7 +141,7 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(Character.isDigit(c))
+				if (Character.isDigit(c))
 					e.consume();
 			}
 		});
@@ -145,7 +154,7 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(Character.isDigit(c))
+				if (Character.isDigit(c))
 					e.consume();
 			}
 		});
@@ -163,7 +172,7 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!Character.isDigit(c))
+				if (!Character.isDigit(c))
 					e.consume();
 			}
 		});
@@ -181,7 +190,7 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!Character.isAlphabetic(c))
+				if (!Character.isAlphabetic(c))
 					e.consume();
 			}
 		});
@@ -194,7 +203,7 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!Character.isDigit(c))
+				if (!Character.isDigit(c))
 					e.consume();
 			}
 		});
@@ -247,7 +256,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -260,7 +270,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -273,7 +284,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -286,7 +298,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -299,7 +312,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -312,7 +326,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -325,7 +340,8 @@ public class AddEmplyee {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SLASH || c==KeyEvent.VK_DELETE || c==KeyEvent.VK_SEMICOLON || c==KeyEvent.VK_MINUS))
+				if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SLASH || c == KeyEvent.VK_DELETE
+						|| c == KeyEvent.VK_SEMICOLON || c == KeyEvent.VK_MINUS))
 					e.consume();
 			}
 		});
@@ -341,10 +357,10 @@ public class AddEmplyee {
 
 				emp.setFName(textFieldFirstName.getText());
 				emp.setLName(textFieldLastName.getText());
-				if(textFieldPhone.getText().isEmpty()){
+				if (textFieldPhone.getText().isEmpty()) {
 					emp.setPhone(0);
-				}else{
-					
+				} else {
+
 					try {
 						emp.setPhone(Integer.parseInt(textFieldPhone.getText(0, 10).toString()));
 					} catch (NumberFormatException | BadLocationException e1) {
@@ -354,9 +370,9 @@ public class AddEmplyee {
 				emp.setAddress(textFieldAddress.getText());
 				emp.setEmailID(textFieldEmail.getText());
 				emp.setState(textFieldState.getText());
-				if(textFieldZip.getText().isEmpty()){
+				if (textFieldZip.getText().isEmpty()) {
 					emp.setZIP(0);
-				}else{
+				} else {
 					emp.setZIP(Integer.parseInt(textFieldZip.getText()));
 				}
 				emp.setDriver(chckbxDriver.isSelected());
@@ -434,8 +450,9 @@ public class AddEmplyee {
 
 		group.add(rdbtnLead);
 		group.add(rdbtnStudent);
-		
-		lblInputTimingsLike = new JLabel("<HTML>Input timings like:<br>0700-1100;<br>1200-1600;1800-2330;<br><br>Use '-' to seperate Start Time and End Time<br>Use ';' to complete a timing</HTML>");
+
+		lblInputTimingsLike = new JLabel(
+				"<HTML>Input timings like:<br>0700-1100;<br>1200-1600;1800-2330;<br><br>Use '-' to seperate Start Time and End Time<br>Use ';' to complete a timing</HTML>");
 		lblInputTimingsLike.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInputTimingsLike.setBounds(987, 374, 249, 218);
 		frame.getContentPane().add(lblInputTimingsLike);

@@ -27,6 +27,12 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Omkar Nibandhe <br>
+ * 		May 5, 2017 <br>
+ * 		https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class AddEvent {
 
 	private JFrame frame;
@@ -39,6 +45,9 @@ public class AddEvent {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args
+	 *            Usually null. Unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -139,7 +148,7 @@ public class AddEvent {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!(Character.isDigit(c) ))
+				if (!(Character.isDigit(c)))
 					e.consume();
 
 			}
@@ -189,7 +198,7 @@ public class AddEvent {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!(Character.isDigit(c) ))
+				if (!(Character.isDigit(c)))
 					e.consume();
 			}
 		});

@@ -15,16 +15,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import com.catering.classes.SQLiteConnection;
+
 import net.proteanit.sql.DbUtils;
 
+/**
+ * @author Omkar Nibandhe <br>
+ * 		May 5, 2017 <br>
+ * 		https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class ViewEvents_1 {
 
 	private JFrame frame;
 	private JTable table;
 
-
 	/**
 	 * Launch the application.
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -120,7 +128,15 @@ public class ViewEvents_1 {
 		frame.getContentPane().add(btnAllLeads);
 
 	}
-	
+
+	/**
+	 * This method sets the model for the table using the ResultSet from the
+	 * querry fired.
+	 * 
+	 * @param SQLquery
+	 *            SQL querry for the prepared statement in order to fetch
+	 *            results and display in the JTable.
+	 */
 	private void showTable(String SQLquery) {
 		// TODO Auto-generated method stub
 		try {
@@ -137,9 +153,8 @@ public class ViewEvents_1 {
 		} catch (Exception e) {
 
 		} finally {
-			//SQLiteConnection.dbClose();
+			// SQLiteConnection.dbClose();
 		}
 	}
 
-	
 }

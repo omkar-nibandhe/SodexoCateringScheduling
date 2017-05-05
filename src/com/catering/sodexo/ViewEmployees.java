@@ -12,12 +12,20 @@ import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
+import com.catering.classes.SQLiteConnection;
+
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author Omkar Nibandhe <br>
+ * 		May 5, 2017 <br>
+ * 		https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class ViewEmployees {
 
 	private JFrame frame;
@@ -25,6 +33,7 @@ public class ViewEmployees {
 
 	/**
 	 * Launch the application.
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -62,7 +71,7 @@ public class ViewEmployees {
 		} catch (Exception e) {
 
 		} finally {
-			//SQLiteConnection.dbClose();
+			// SQLiteConnection.dbClose();
 		}
 	}
 

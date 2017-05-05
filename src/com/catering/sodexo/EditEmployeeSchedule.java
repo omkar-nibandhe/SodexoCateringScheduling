@@ -22,6 +22,12 @@ import com.catering.classes.AvailabilityDAO;
 import com.catering.classes.Employee;
 import com.catering.classes.EmployeeDAO;
 
+/**
+ * @author Omkar Nibandhe <br>
+ * 		May 5, 2017 <br>
+ * 		https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class EditEmployeeSchedule {
 
 	private static int empID;
@@ -68,12 +74,15 @@ public class EditEmployeeSchedule {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args
+	 *            unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+
 					EditEmployeeSchedule window = new EditEmployeeSchedule();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -101,7 +110,7 @@ public class EditEmployeeSchedule {
 			return;
 		textFieldFirstName.setText(e.getFName());
 		textFieldLastName.setText(e.getLName());
-		
+
 		textFieldPhone.setText(Integer.toString(e.getPhone()));
 		textFieldEmail.setText(e.getEmailID());
 		textFieldAddress.setText(e.getAddress());
@@ -141,7 +150,7 @@ public class EditEmployeeSchedule {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblFirstName = new JLabel("First Name");
-		
+
 		lblFirstName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFirstName.setBounds(70, 115, 88, 34);
 		frame.getContentPane().add(lblFirstName);
@@ -194,7 +203,7 @@ public class EditEmployeeSchedule {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!(Character.isAlphabetic(c) ))
+				if (!(Character.isAlphabetic(c)))
 					e.consume();
 			}
 		});
@@ -400,17 +409,17 @@ public class EditEmployeeSchedule {
 				emp.setID(getEmpID());
 				emp.setFName(textFieldFirstName.getText());
 				emp.setLName(textFieldLastName.getText());
-				if(textFieldPhone.getText().isEmpty()){
+				if (textFieldPhone.getText().isEmpty()) {
 					emp.setPhone(0);
-				}else{
+				} else {
 					emp.setPhone(Integer.parseInt(textFieldPhone.getText().substring(0, 10)));
 				}
 				emp.setAddress(textFieldAddress.getText());
 				emp.setEmailID(textFieldEmail.getText());
 				emp.setState(textFieldState.getText());
-				if(textFieldZip.getText().isEmpty()){
+				if (textFieldZip.getText().isEmpty()) {
 					emp.setZIP(0);
-				}else{
+				} else {
 					emp.setZIP(Integer.parseInt(textFieldZip.getText()));
 				}
 				emp.setDriver(chckbxDriver.isSelected());

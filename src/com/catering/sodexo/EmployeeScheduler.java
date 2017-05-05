@@ -28,12 +28,19 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import com.catering.classes.AvailabilityDAO;
+import com.catering.classes.SQLiteConnection;
 import com.catering.classes.Schedule;
 import com.catering.classes.ScheduleDAO;
 import com.catering.classes.WeekDAO;
 
 import net.proteanit.sql.DbUtils;
 
+/**
+ * @author Omkar Nibandhe <br>
+ * 		May 5, 2017 <br>
+ * 		https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class EmployeeScheduler {
 
 	private JFrame frame;
@@ -53,6 +60,7 @@ public class EmployeeScheduler {
 
 	/**
 	 * Launch the application.
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,7 +82,7 @@ public class EmployeeScheduler {
 	public EmployeeScheduler() {
 
 		initialize();
-		//pullWeek();
+		// pullWeek();
 		fillUpTables();
 
 		fillScheduledEmpTable();
@@ -154,8 +162,8 @@ public class EmployeeScheduler {
 
 	private void pullWeek() {
 		java.sql.Date[] date = WeekDAO.getWeek();
-		//System.out.println(date[0]);
-		//System.out.println(date[1]);
+		// System.out.println(date[0]);
+		// System.out.println(date[1]);
 	}
 
 	/**
@@ -176,7 +184,7 @@ public class EmployeeScheduler {
 		datePicker.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(" Action Performed");
+				// System.out.println(" Action Performed");
 				myDate = java.sql.Date.valueOf(datePicker.getJFormattedTextField().getText());
 				cal = Calendar.getInstance();
 				cal.setTime(myDate);
@@ -242,9 +250,9 @@ public class EmployeeScheduler {
 		JButton btnPrintEvents = new JButton("Print Events");
 		btnPrintEvents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DisplaySchedule.main(new String[]{"Events", lblDateFriday.getText(),
-						lblDateSaturday.getText(), lblDateSunday.getText(), lblDateMonday.getText(),
-						lblDateTuesday.getText(), lblDateWednesday.getText(), lblDateThursday.getText()});
+				DisplaySchedule.main(new String[] { "Events", lblDateFriday.getText(), lblDateSaturday.getText(),
+						lblDateSunday.getText(), lblDateMonday.getText(), lblDateTuesday.getText(),
+						lblDateWednesday.getText(), lblDateThursday.getText() });
 			}
 		});
 		btnPrintEvents.setBounds(1041, 582, 199, 66);
@@ -253,9 +261,9 @@ public class EmployeeScheduler {
 		JButton btnPrintWeek = new JButton("Print Week");
 		btnPrintWeek.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DisplaySchedule.main(new String[]{"Week", lblDateFriday.getText(),
-						lblDateSaturday.getText(), lblDateSunday.getText(), lblDateMonday.getText(),
-						lblDateTuesday.getText(), lblDateWednesday.getText(), lblDateThursday.getText()});
+				DisplaySchedule.main(new String[] { "Week", lblDateFriday.getText(), lblDateSaturday.getText(),
+						lblDateSunday.getText(), lblDateMonday.getText(), lblDateTuesday.getText(),
+						lblDateWednesday.getText(), lblDateThursday.getText() });
 			}
 		});
 		btnPrintWeek.setBounds(1041, 494, 199, 66);
@@ -371,7 +379,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -461,7 +469,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -551,7 +559,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -644,7 +652,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -737,7 +745,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -826,7 +834,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();
@@ -880,7 +888,7 @@ public class EmployeeScheduler {
 			public void mouseClicked(MouseEvent arg0) {
 				int row = tableFriday.getSelectedRow();
 				fridayEventID = (int) tableFriday.getModel().getValueAt(row, 0);
-				
+
 			}
 		});
 		tableFriday.setBounds(9, 57, 355, 428);
@@ -900,7 +908,6 @@ public class EmployeeScheduler {
 					fridayDel.setStartTime((int) tableFridayEmpList.getModel().getValueAt(row, 4));
 					fridayDel.setEndTime((int) tableFridayEmpList.getModel().getValueAt(row, 5));
 
-					
 				}
 			}
 		});
@@ -914,7 +921,7 @@ public class EmployeeScheduler {
 				String[] line = result.split(" ");
 				line[3] = JOptionPane.showInputDialog("Start time : ", line[3]);
 				line[4] = JOptionPane.showInputDialog("End time : ", line[4]);
-				if(line[3]==null || line[4] == null){
+				if (line[3] == null || line[4] == null) {
 					return;
 				}
 				Schedule sc = new Schedule();

@@ -15,12 +15,19 @@ import javax.swing.JTable;
 
 import com.catering.classes.AvailabilityDAO;
 import com.catering.classes.EmployeeDAO;
+import com.catering.classes.SQLiteConnection;
 
 import net.proteanit.sql.DbUtils;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author Omkar Nibandhe <br>
+ *         May 5, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class DeleteEmployee {
 
 	private JFrame frame;
@@ -28,6 +35,9 @@ public class DeleteEmployee {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args
+	 *            usually null. Unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,17 +59,24 @@ public class DeleteEmployee {
 		initialize();
 	}
 
+	/**
+	 * This method sets the model for the table using the ResultSet from the
+	 * querry fired.
+	 * 
+	 * @param SQLquery
+	 *            SQL querry for the prepared statement in order to fetch
+	 *            results and display in the JTable.
+	 */
 	private void showTable(String SQLquery) {
 		// TODO Auto-generated method stub
 		try {
 			Connection viewTable = SQLiteConnection.getInstance();
-			
 
 			PreparedStatement stmt = viewTable.prepareStatement(SQLquery);
 			ResultSet rs = stmt.executeQuery();
 			table.setModel(DbUtils.resultSetToTableModel(rs));
-			
-			//SQLiteConnection.dbClose();
+
+			// SQLiteConnection.dbClose();
 
 		} catch (Exception e) {
 
@@ -91,6 +108,10 @@ public class DeleteEmployee {
 
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
+			/**
+			 * Override mouseClicked event to confirm deletion of the record
+			 * from database.
+			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
@@ -146,11 +167,16 @@ public class DeleteEmployee {
 
 		JButton btnDelete = new JButton("DELETE");
 		btnDelete.addActionListener(new ActionListener() {
+			/**
+			 * Confirm deletion of the record and corresponding records from
+			 * Employee database and Availability Database.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int row = table.getSelectedRow();
 					if (row > 0) {
-						switch(JOptionPane.showConfirmDialog(null, "Do you want to delete "+ table.getModel().getValueAt(row, 1))){
+						switch (JOptionPane.showConfirmDialog(null,
+								"Do you want to delete " + table.getModel().getValueAt(row, 1))) {
 						case 0:
 							int deleteID = (int) table.getModel().getValueAt(row, 0);
 							AvailabilityDAO.deleteTimings(deleteID);

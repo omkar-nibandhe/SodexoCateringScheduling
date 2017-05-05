@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.catering.sodexo.SQLiteConnection;
-
 /**
  * @author Omkar Nibandhe<br>
  *         Apr 25, 2017 <br>

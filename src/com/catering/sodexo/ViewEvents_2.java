@@ -25,6 +25,12 @@ import com.catering.classes.EventDAO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Omkar Nibandhe <br>
+ *         May 5, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class ViewEvents_2 {
 
 	private JFrame frame;
@@ -50,16 +56,28 @@ public class ViewEvents_2 {
 	private ButtonGroup group;
 	private Event evt;
 
+	/**
+	 * Get the SrNo for the event to be edit.
+	 * 
+	 * @return Returns the unique int value for event
+	 */
 	public static int getMySrNo() {
 		return mySrNo;
 	}
 
+	/**
+	 * Set the SrNo for the event to be edit.
+	 * 
+	 * @param mySrNo
+	 *            the unique int value for event
+	 */
 	public static void setMySrNo(int mySrNo) {
 		ViewEvents_2.mySrNo = mySrNo;
 	}
 
 	/**
 	 * Launch the application.
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -307,6 +325,12 @@ public class ViewEvents_2 {
 				frame.dispose();
 			}
 
+			/**
+			 * Method to save day on the basis of day selected from the radio
+			 * button.
+			 * 
+			 * @return
+			 */
 			private String dayChoose() {
 				if (rdbtnFriday.isSelected())
 					return new String("friday");
@@ -330,8 +354,10 @@ public class ViewEvents_2 {
 
 	}
 
+	/**
+	 * Method to set the date
+	 */
 	private void setData() {
-		// TODO Auto-generated method stub
 		Event e = EventDAO.fetchEvent(getMySrNo());
 
 		textFieldEventNumber.setText(Integer.toString(e.getEventID()));
@@ -353,6 +379,13 @@ public class ViewEvents_2 {
 
 	}
 
+	/**
+	 * Method to set the Date for the event. Forces user for viewing proper
+	 * week.
+	 * 
+	 * @param date
+	 *            java.sql.Date object
+	 */
 	private void setDate(Date date) {
 		// TODO Auto-generated method stub
 		if (date == null) {
@@ -366,6 +399,12 @@ public class ViewEvents_2 {
 
 	}
 
+	/**
+	 * Set the radio button for the day.
+	 * 
+	 * @param day
+	 *            string representation of the day in lower case.
+	 */
 	private void setDay(String day) {
 		// TODO Auto-generated method stub
 		if (day.equalsIgnoreCase("friday"))

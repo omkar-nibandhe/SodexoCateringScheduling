@@ -16,10 +16,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.catering.classes.EventDAO;
+import com.catering.classes.SQLiteConnection;
 import com.catering.classes.ScheduleDAO;
 
 import net.proteanit.sql.DbUtils;
 
+/**
+ * @author Omkar Nibandhe <br>
+ *         May 5, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class DeleteEvent {
 
 	private JFrame frame;
@@ -27,6 +34,8 @@ public class DeleteEvent {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -66,6 +75,10 @@ public class DeleteEvent {
 
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
+			/**
+			 * Get confirmation before deleting the event and related scheduled
+			 * employees.
+			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -78,8 +91,8 @@ public class DeleteEvent {
 					 * int val = (int) (table.getModel().getValueAt(row, 0));
 					 * ViewEvents_2.setMySrNo(val); ViewEvents_2.main(null);
 					 */
-					EventDAO.removeEvent((int)table.getModel().getValueAt(row, 0));
-					ScheduleDAO.removeSchedulebyEventID((int)table.getModel().getValueAt(row, 1));
+					EventDAO.removeEvent((int) table.getModel().getValueAt(row, 0));
+					ScheduleDAO.removeSchedulebyEventID((int) table.getModel().getValueAt(row, 1));
 					EmployeeScheduler.main(null);
 					frame.dispose();
 				}
@@ -89,6 +102,9 @@ public class DeleteEvent {
 
 		JButton btnAllEmployees = new JButton("All Events");
 		btnAllEmployees.addActionListener(new ActionListener() {
+			/**
+			 * Fetch all events.
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				String sqlQuerry = "SELECT * FROM EventTable";
 				showTable(sqlQuerry);
@@ -99,7 +115,11 @@ public class DeleteEvent {
 
 		JButton btnAllStudents = new JButton("China Events");
 		btnAllStudents.addActionListener(new ActionListener() {
+			/**
+			 * Fetch all china service events
+			 */
 			public void actionPerformed(ActionEvent e) {
+
 				String sqlQuerry = "SELECT * FROM EventTable where Disposable = 0";
 				showTable(sqlQuerry);
 			}
@@ -109,6 +129,9 @@ public class DeleteEvent {
 
 		JButton btnAllLeads = new JButton("Disposable Events");
 		btnAllLeads.addActionListener(new ActionListener() {
+			/**
+			 * Fetch all disposable service type events.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				String sqlQuerry = "SELECT * FROM EventTable where Disposable = 1";
 				showTable(sqlQuerry);
@@ -119,6 +142,14 @@ public class DeleteEvent {
 
 	}
 
+	/**
+	 * This method sets the model for the table using the ResultSet from the
+	 * querry fired.
+	 * 
+	 * @param SQLquery
+	 *            SQL querry for the prepared statement in order to fetch
+	 *            results and display in the JTable.
+	 */
 	private void showTable(String SQLquery) {
 		// TODO Auto-generated method stub
 		try {
@@ -135,7 +166,7 @@ public class DeleteEvent {
 		} catch (Exception e) {
 
 		} finally {
-			//SQLiteConnection.dbClose();
+			// SQLiteConnection.dbClose();
 		}
 	}
 

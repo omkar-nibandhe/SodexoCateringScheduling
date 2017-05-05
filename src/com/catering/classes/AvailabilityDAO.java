@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.catering.sodexo.SQLiteConnection;
-
 /**
  * @author Omkar Nibandhe <br>
  *         Apr 25, 2017 <br>

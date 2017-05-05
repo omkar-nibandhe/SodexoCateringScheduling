@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * @author Omkar Nibandhe
- * May 4, 2017 	
- * https://www.linkedin.com/in/omkarnibandhe
+ * @author Omkar Nibandhe May 4, 2017 https://www.linkedin.com/in/omkarnibandhe
  * 
- * Employee Scheduling software for State University of New York, Binghamton's Catering Unit.
- * This software allows management of students and Leads and schedule them work according to their availability.
+ *         Employee Scheduling software for State University of New York,
+ *         Binghamton's Catering Unit. This software allows management of
+ *         students and Leads and schedule them work according to their
+ *         availability.
  */
 public class MainPage {
 
@@ -24,7 +24,10 @@ public class MainPage {
 	Connection conn = null;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. Main Page to start the application.
+	 * 
+	 * @param args
+	 *            not used.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,79 +47,68 @@ public class MainPage {
 	 */
 	public MainPage() {
 		initialize();
-		
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		mainFrame = new JFrame();
 		mainFrame.setBounds(100, 100, 1280, 720);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
-		
+
 		JLabel lblAdministratorTools = new JLabel("Administrator Tools");
 		lblAdministratorTools.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdministratorTools.setBounds(841, 76, 296, 60);
 		mainFrame.getContentPane().add(lblAdministratorTools);
-		
+
 		JButton btnNewButton = new JButton("View Employees");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.setVisible(false);
+				// mainFrame.setVisible(false);
 				ViewEmployees.main(null);
 				mainFrame.dispose();
 			}
 		});
 		btnNewButton.setBounds(841, 157, 296, 60);
 		mainFrame.getContentPane().add(btnNewButton);
-		
+
 		JButton btnAddNewEmploye = new JButton("Add NEW Employe");
 		btnAddNewEmploye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.setVisible(false);
+				// mainFrame.setVisible(false);
 				AddEmplyee.main(null);
 				mainFrame.dispose();
 			}
 		});
 		btnAddNewEmploye.setBounds(841, 235, 296, 60);
 		mainFrame.getContentPane().add(btnAddNewEmploye);
-		
+
 		JButton btnRemoveEmploye = new JButton("Remove Employe");
 		btnRemoveEmploye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.setVisible(false);
+				// mainFrame.setVisible(false);
 				DeleteEmployee.main(null);
 				mainFrame.dispose();
 			}
 		});
 		btnRemoveEmploye.setBounds(841, 313, 296, 60);
 		mainFrame.getContentPane().add(btnRemoveEmploye);
-		
+
 		JButton btnEditEmployeSchedule = new JButton("Edit Employe Schedule");
 		btnEditEmployeSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.setVisible(false);
+				// mainFrame.setVisible(false);
 				ViewEmployees.main(null);
 				mainFrame.dispose();
 			}
 		});
 		btnEditEmployeSchedule.setBounds(841, 393, 296, 60);
 		mainFrame.getContentPane().add(btnEditEmployeSchedule);
-		
-		JButton btnEmailStudents = new JButton("Email Students");
-		btnEmailStudents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//mainFrame.setVisible(false);
-				EmailEmployees.main(null);
-				mainFrame.dispose();
-			}
-		});
-		btnEmailStudents.setBounds(841, 474, 296, 60);
-		mainFrame.getContentPane().add(btnEmailStudents);
-		
+
 		JButton btnScheduleEmployees = new JButton("Schedule Employees");
 		btnScheduleEmployees.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,7 +118,7 @@ public class MainPage {
 		});
 		btnScheduleEmployees.setBounds(114, 474, 603, 60);
 		mainFrame.getContentPane().add(btnScheduleEmployees);
-		
+
 		JLabel lblCatering = new JLabel("Catering");
 		lblCatering.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCatering.setBounds(114, 157, 603, 296);
