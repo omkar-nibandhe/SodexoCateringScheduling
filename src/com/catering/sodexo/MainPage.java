@@ -10,6 +10,14 @@ import java.sql.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * @author Omkar Nibandhe
+ * May 4, 2017 	
+ * https://www.linkedin.com/in/omkarnibandhe
+ * 
+ * Employee Scheduling software for State University of New York, Binghamton's Catering Unit.
+ * This software allows management of students and Leads and schedule them work according to their availability.
+ */
 public class MainPage {
 
 	private JFrame mainFrame;
@@ -36,7 +44,7 @@ public class MainPage {
 	 */
 	public MainPage() {
 		initialize();
-		//conn = SQLiteConnection.dbConnect();
+		
 	}
 
 	/**

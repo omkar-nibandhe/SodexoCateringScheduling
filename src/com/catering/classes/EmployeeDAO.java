@@ -6,12 +6,25 @@ import java.sql.ResultSet;
 
 import com.catering.sodexo.SQLiteConnection;
 
+/**
+ * @author Omkar Nibandhe<br>
+ *         May 4, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
+ * @version 1.0
+ */
 public class EmployeeDAO {
 
-
+	/**
+	 * Returns Employee class object from EmployeeTable by searching with
+	 * EmployeeID (int).
+	 * 
+	 * @param empID
+	 *            unique int value referencing employee
+	 * @return Employee class object
+	 */
 	public static Employee fetchEmployee(int empID) {
 		Employee e = new Employee();
-		//System.out.println("empID in DAO " + empID);
+		// System.out.println("empID in DAO " + empID);
 		try {
 
 			Connection editEmployee = SQLiteConnection.getInstance();
@@ -37,6 +50,12 @@ public class EmployeeDAO {
 		return e;
 	}
 
+	/**
+	 * Update Employee record.
+	 * 
+	 * @param e
+	 *            Employee object to set new values to existing record.
+	 */
 	public static void updateEmployee(Employee e) {
 		try {
 
@@ -55,7 +74,7 @@ public class EmployeeDAO {
 			pstmt.setInt(10, e.getID());
 
 			pstmt.executeUpdate();
-			//saveConnection.commit();
+			// saveConnection.commit();
 		} catch (Exception exc) {
 			// TODO: handle exception
 			exc.printStackTrace();
@@ -63,6 +82,14 @@ public class EmployeeDAO {
 
 	}
 
+	/**
+	 * Adds employee to the EmployeeTable database
+	 * 
+	 * @param e
+	 *            Employee class object specifying all the details related to
+	 *            employee.
+	 * @return Unique identification number (EmployeeID)
+	 */
 	public static int addEmployee(Employee e) {
 		int i = 0;
 		try {
@@ -84,7 +111,7 @@ public class EmployeeDAO {
 			pstmt.setBoolean(9, e.isStudent());
 
 			pstmt.executeUpdate();
-			//saveConnection.commit();
+			// saveConnection.commit();
 			pstmt.close();
 
 			pstmt = saveConnection.prepareStatement(sqlQuerry2);
@@ -101,6 +128,12 @@ public class EmployeeDAO {
 		return i;
 	}
 
+	/**
+	 * Removes employee from the EmployeeTable database by specifying employeeID
+	 * (int) value.
+	 * 
+	 * @param empID
+	 */
 	public static void removeEmployee(int empID) {
 		try {
 
@@ -110,20 +143,19 @@ public class EmployeeDAO {
 			pstmt.setInt(1, empID);
 			pstmt.executeUpdate();
 			pstmt.close();
-			
+
 			sqlQuerry = "DELETE FROM AvailabilityTable WHERE EmployeeID = ?";
 			pstmt = saveConnection.prepareStatement(sqlQuerry);
 			pstmt.setInt(1, empID);
 			pstmt.executeUpdate();
 			pstmt.close();
-			
+
 			sqlQuerry = "DELETE FROM ScheduleDB WHERE EmployeeID = ?";
 			pstmt = saveConnection.prepareStatement(sqlQuerry);
 			pstmt.setInt(1, empID);
 			pstmt.executeUpdate();
 			pstmt.close();
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

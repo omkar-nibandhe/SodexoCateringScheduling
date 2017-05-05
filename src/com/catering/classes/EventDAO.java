@@ -7,16 +7,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 import com.catering.sodexo.SQLiteConnection;
 
 /**
- * @author Omkar Nibandhe
- * Apr 25, 2017 	
- * https://www.linkedin.com/in/omkarnibandhe
+ * @author Omkar Nibandhe<br>
+ *         Apr 25, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
  */
 public class EventDAO {
-	public static Event fetchEvent(int SrNo){
+	/**
+	 * Fetch the events from EventTable database by specifying Sr.No.
+	 * 
+	 * @param SrNo
+	 *            Unique identification for the event.
+	 * @return Event object
+	 */
+	public static Event fetchEvent(int SrNo) {
 		Event e = new Event();
 		try {
 
@@ -25,9 +31,8 @@ public class EventDAO {
 			PreparedStatement stmt = editEvent.prepareStatement(SQLquery);
 			stmt.setInt(1, SrNo);
 
-	
 			ResultSet rs = stmt.executeQuery();
-			
+
 			e.setSrNo(rs.getInt("SrNo"));
 			e.setEventID(rs.getInt("EventID"));
 			e.setEventName(rs.getString("EventName"));
@@ -38,28 +43,33 @@ public class EventDAO {
 			e.setEndTime(rs.getInt("EndTime"));
 			e.setDate(rs.getDate("Date"));
 			e.setDay(rs.getString("Day"));
-			
+
 			stmt.close();
-			
+
 			return e;
 
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
 		return e;
-		
-	}
-	
 
-	public static void updateEvent(Event e){
-		
+	}
+
+	/**
+	 * Update the event details.
+	 * 
+	 * @param e
+	 *            Event object containing the updated event details.
+	 */
+	public static void updateEvent(Event e) {
+
 		try {
 
 			Connection updateEvent = SQLiteConnection.getInstance();
 			String sqlQuery = "UPDATE EventTable SET EventID = ?, EventName = ?, EventLocation = ?, GuestCoune = ?, Disposable = ?, StartTime = ?, EndTime = ?, Date = ?, Day = ? WHERE SrNo = ?";
-			
+
 			PreparedStatement pstmt = updateEvent.prepareStatement(sqlQuery);
-			
+
 			pstmt.setInt(1, e.getEventID());
 			pstmt.setString(2, e.getEventName());
 			pstmt.setString(3, e.getEventLocation());
@@ -70,16 +80,23 @@ public class EventDAO {
 			pstmt.setDate(8, e.getDate());
 			pstmt.setString(9, e.getDay());
 			pstmt.setInt(10, e.getSrNo());
-			
+
 			pstmt.executeUpdate();
 			pstmt.close();
 
 		} catch (Exception err) {
 			err.printStackTrace();
-		}	
+		}
 	}
-	
-	public static int addEvent(Event e){
+
+	/**
+	 * Add new event to the database EventTable.
+	 * 
+	 * @param e
+	 *            Event object with all the details.
+	 * @return Returns the Unique ID number for the newly added record.
+	 */
+	public static int addEvent(Event e) {
 		int SrNo = 0;
 		try {
 
@@ -99,8 +116,8 @@ public class EventDAO {
 			pstmt.setDate(8, e.getDate());
 			pstmt.setString(9, e.getDay());
 			pstmt.executeUpdate();
-			
-			//saveConnection.commit();
+
+			// saveConnection.commit();
 			pstmt.close();
 
 			pstmt = saveConnection.prepareStatement(sqlQuerry2);
@@ -116,21 +133,26 @@ public class EventDAO {
 		}
 		return SrNo;
 	}
-	
-	public static void removeEvent(int EventID){
+
+	/**
+	 * Remove the event from the database with reference to EventID.
+	 * 
+	 * @param EventID
+	 *            Event number
+	 */
+	public static void removeEvent(int EventID) {
 		try {
 
 			Connection removeConnection = SQLiteConnection.getInstance();
 			String sqlQuerry = "DELETE FROM EventTable WHERE SrNo = ?";
-			
 
 			PreparedStatement pstmt = removeConnection.prepareStatement(sqlQuerry);
 
 			pstmt.setInt(1, EventID);
-			
+
 			pstmt.executeUpdate();
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

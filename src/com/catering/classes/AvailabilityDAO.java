@@ -12,10 +12,19 @@ import java.util.List;
 import com.catering.sodexo.SQLiteConnection;
 
 /**
- * @author Omkar Nibandhe Apr 25, 2017 https://www.linkedin.com/in/omkarnibandhe
+ * @author Omkar Nibandhe <br>
+ *         Apr 25, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
  */
 public class AvailabilityDAO {
-
+	/**
+	 * Get availability specifying employeeID for complete week.
+	 * 
+	 * @param empID
+	 *            unique value to reference employee
+	 * @return Returns all the timings specified by unique identification.<br>
+	 *         StringBuilder[]
+	 */
 	public static StringBuilder[] getAllTimings(int empID) {
 		StringBuilder[] results = new StringBuilder[7];
 		for (int i = 0; i < 7; i++)
@@ -75,6 +84,12 @@ public class AvailabilityDAO {
 		return results;
 	}
 
+	/**
+	 * Delete availability specifying employeeID
+	 * 
+	 * @param empID
+	 *            unique value to reference employee
+	 */
 	public static void deleteTimings(int empID) {
 		try {
 			Connection deletTime = SQLiteConnection.getInstance();
@@ -82,7 +97,7 @@ public class AvailabilityDAO {
 			PreparedStatement stmt = deletTime.prepareStatement(SQLquery);
 			stmt.setInt(1, empID);
 			stmt.executeUpdate();
-			//deletTime.commit();
+			// deletTime.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -90,12 +105,22 @@ public class AvailabilityDAO {
 
 	}
 
+	/**
+	 * Add timing to AvailabilityTable in the database.
+	 * 
+	 * @param empID
+	 *            unique value to reference employee
+	 * @param dayTimings
+	 *            String format StartTime-EndTime;StartTime-EndTime;
+	 * @param day
+	 *            day of the week in lowercase.
+	 */
 	public static void addTimings(int empID, String dayTimings, String day) {
 		try {
 			Connection addTime = SQLiteConnection.getInstance();
 			String sqlQuerry1 = "INSERT INTO AvailabilityTable VALUES(?,?,?,?)";
 			PreparedStatement pstmt = addTime.prepareStatement(sqlQuerry1);
-			
+
 			AvailabilityDAO.insertTimings(pstmt, dayTimings, day, empID);
 
 		} catch (Exception e) {
@@ -104,10 +129,24 @@ public class AvailabilityDAO {
 		}
 
 	}
-	
+
+	/**
+	 * Put timing to the database.
+	 * 
+	 * @param pstmt
+	 *            PreparedStatement.
+	 * @param text
+	 *            timing in text format.
+	 * @param day
+	 *            day of week.
+	 * @param empID
+	 *            unique ID to refernece employee.
+	 * @return 0 if no timings to add, 1 on success.
+	 * @throws Exception
+	 */
 	private static int insertTimings(PreparedStatement pstmt, String text, String day, int empID) throws Exception {
 		// TODO Auto-generated method stub
-		if(text.isEmpty()){
+		if (text.isEmpty()) {
 			return 0;
 		}
 		if (text.contains(";")) {
@@ -119,8 +158,11 @@ public class AvailabilityDAO {
 				pstmt.setString(2, day.toLowerCase());
 				pstmt.setInt(3, Integer.parseInt(timeEntry[0]));
 				pstmt.setInt(4, Integer.parseInt(timeEntry[1]));
-				/*//System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
-						+ " EndTime: " + timeEntry[1]);*/
+				/*
+				 * //System.out.println(" EmpID : " + empID + " Day: " + day +
+				 * " Start Time: " + timeEntry[0] + " EndTime: " +
+				 * timeEntry[1]);
+				 */
 				pstmt.executeUpdate();
 			}
 		} else {
@@ -129,16 +171,27 @@ public class AvailabilityDAO {
 			pstmt.setString(2, day.toLowerCase());
 			pstmt.setString(3, timeEntry[0]);
 			pstmt.setString(4, timeEntry[1]);
-			/*//System.out.println(" EmpID : " + empID + " Day: " + day + " Start Time: " + timeEntry[0]
-					+ " EndTime: " + timeEntry[1]);
-			*/return pstmt.executeUpdate();
+			/*
+			 * //System.out.println(" EmpID : " + empID + " Day: " + day +
+			 * " Start Time: " + timeEntry[0] + " EndTime: " + timeEntry[1]);
+			 */return pstmt.executeUpdate();
 		}
 
 		return 0;
 
 	}
 
-	public static String getAllTimingsForDay(int empID, String day){
+	/**
+	 * Get availability specifying employeeID for a specific day.
+	 * 
+	 * @param empID
+	 *            unique value to reference employee.
+	 * @param day
+	 *            day of week in lower case format.
+	 * @return Returns all the timings specified by unique identification.<br>
+	 *         StringBuilder[]
+	 */
+	public static String getAllTimingsForDay(int empID, String day) {
 		String result = null;
 		StringBuilder res = new StringBuilder();
 		try {
@@ -150,19 +203,29 @@ public class AvailabilityDAO {
 
 			ResultSet rs = stmt.executeQuery();
 			String time;
-			while(rs.next()){
+			while (rs.next()) {
 				time = null;
 				time = rs.getInt("StartTime") + "-" + rs.getInt("EndTime") + ";";
 				res.append(time);
 			}
 			result = res.toString();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
-	public static List<String> getAllTimingsForDay(String day){
+
+	/**
+	 * Get timings specifying for a specific day for all employees.
+	 * 
+	 * @param day
+	 *            day of week in lower case format.
+	 * @return Returns all the timings specified by day.<br>
+	 *         List of String in the <b>"StartTime-EndTIme;"</b> format
+	 */
+
+	public static List<String> getAllTimingsForDay(String day) {
 		List<String> result = null;
 		try {
 			Connection editEmployee = SQLiteConnection.getInstance();
@@ -173,16 +236,17 @@ public class AvailabilityDAO {
 			ResultSet rs = stmt.executeQuery();
 			result = new ArrayList<String>();
 			String time = null;
-			while(rs.next()){
+			while (rs.next()) {
 				time = null;
-				time = rs.getInt("EmployeeID")+" "+rs.getString("FName")+ " "+ rs.getString("LName")+ " "+ rs.getInt("StartTime") + " " + rs.getInt("EndTime");
+				time = rs.getInt("EmployeeID") + " " + rs.getString("FName") + " " + rs.getString("LName") + " "
+						+ rs.getInt("StartTime") + " " + rs.getInt("EndTime");
 				result.add(time);
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
 }
