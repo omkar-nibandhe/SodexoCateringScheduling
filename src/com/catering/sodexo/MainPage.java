@@ -1,14 +1,19 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.sql.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * @author Omkar Nibandhe May 4, 2017 https://www.linkedin.com/in/omkarnibandhe
@@ -21,7 +26,7 @@ import java.awt.event.ActionEvent;
 public class MainPage {
 
 	private JFrame mainFrame;
-	Connection conn = null;
+	private BufferedImage img;
 
 	/**
 	 * Launch the application. Main Page to start the application.
@@ -55,11 +60,25 @@ public class MainPage {
 	 */
 	private void initialize() {
 
-		mainFrame = new JFrame();
+		mainFrame = new JFrame("Employee Scheduling Home Page");
+		
+		
+		//new ImageIcon(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
 		mainFrame.setBounds(100, 100, 1280, 720);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 
+		try{
+			img = ImageIO.read(new File(".\\Resources\\BinghamtonBearcats.png"));
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			
+			
+			mainFrame.setIconImage(image1);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 		JLabel lblAdministratorTools = new JLabel("Administrator Tools");
 		lblAdministratorTools.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdministratorTools.setBounds(841, 76, 296, 60);
@@ -119,7 +138,7 @@ public class MainPage {
 		btnScheduleEmployees.setBounds(114, 474, 603, 60);
 		mainFrame.getContentPane().add(btnScheduleEmployees);
 
-		JLabel lblCatering = new JLabel("Catering");
+		JLabel lblCatering = new JLabel(new ImageIcon(img));
 		lblCatering.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCatering.setBounds(114, 157, 603, 296);
 		mainFrame.getContentPane().add(lblCatering);

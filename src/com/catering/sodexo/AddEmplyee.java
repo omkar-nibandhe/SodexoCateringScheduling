@@ -1,11 +1,15 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -93,9 +97,18 @@ public class AddEmplyee {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Add Employee");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		try{
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			
+			
+			frame.setIconImage(image1);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		frame.getContentPane().setLayout(null);
 		suggestionLabel = new JLabel();
 		suggestionLabel.setText("Enter Time as:\n 0700-1300;\n0700-1300;1800-2130");

@@ -1,21 +1,25 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import com.catering.classes.SQLiteConnection;
 
 import net.proteanit.sql.DbUtils;
-import javax.swing.JLabel;
 
 /**
  * @author Omkar Nibandhe <br>
@@ -55,7 +59,8 @@ public class DisplaySchedule {
 	/**
 	 * Create the application.
 	 *
-	 * @param args argument list for dates. 
+	 * @param args
+	 *            argument list for dates.
 	 */
 	public DisplaySchedule(String[] args) {
 		initialize();
@@ -100,11 +105,18 @@ public class DisplaySchedule {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Display Schedule");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		JButton btnNewButton = new JButton("Back");
+		try {
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			frame.setIconImage(image1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnNewButton.addActionListener(new ActionListener() {
 			/**
 			 * Go back to Employee Scheduling page.

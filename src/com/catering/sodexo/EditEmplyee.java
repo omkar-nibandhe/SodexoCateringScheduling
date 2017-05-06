@@ -1,9 +1,13 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -79,11 +83,17 @@ public class EditEmplyee {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Edit Employee");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		try {
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			frame.setIconImage(image1);
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		textField = new JTextField();
 		textField.setBounds(70, 11, 706, 47);
 		frame.getContentPane().add(textField);

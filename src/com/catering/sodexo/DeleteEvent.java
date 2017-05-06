@@ -1,14 +1,18 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,7 +39,8 @@ public class DeleteEvent {
 	/**
 	 * Launch the application.
 	 *
-	 * @param args unused
+	 * @param args
+	 *            unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,11 +59,17 @@ public class DeleteEvent {
 	 * Create the application.
 	 */
 	public DeleteEvent() {
-		frame = new JFrame();
+		frame = new JFrame("Delete Event");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		try {
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			frame.setIconImage(image1);
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

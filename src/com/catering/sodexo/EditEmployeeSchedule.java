@@ -1,11 +1,15 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,8 +28,8 @@ import com.catering.classes.EmployeeDAO;
 
 /**
  * @author Omkar Nibandhe <br>
- * 		May 5, 2017 <br>
- * 		https://www.linkedin.com/in/omkarnibandhe
+ *         May 5, 2017 <br>
+ *         https://www.linkedin.com/in/omkarnibandhe
  * @version 1.0
  */
 public class EditEmployeeSchedule {
@@ -144,11 +148,18 @@ public class EditEmployeeSchedule {
 	 */
 	private void initialize() {
 
-		frame = new JFrame();
+		frame = new JFrame("Edit Employee Schedule");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		try {
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			frame.setIconImage(image1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		JLabel lblFirstName = new JLabel("First Name");
 
 		lblFirstName.setHorizontalAlignment(SwingConstants.CENTER);

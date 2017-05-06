@@ -1,12 +1,14 @@
 package com.catering.sodexo;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author Omkar Nibandhe <br>
@@ -73,11 +77,17 @@ public class AddEvent {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Add Event");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		try{
+			Image image1 = ImageIO.read(new File(".\\Resources\\binghamton_bearcats-alternate-2001.png"));
+			frame.setIconImage(image1);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		SqlDateModel model = new SqlDateModel();
 		Properties p = new Properties();
 		p.put("text.today", "Today");
